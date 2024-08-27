@@ -7,7 +7,7 @@ module.exports = {
     mode: "development",
     entry: "./src/main.js",
     output: {
-        filename: "todo.js",
+        filename: "odinTodo.js",
         path: path.resolve(__dirname, "dist"),
         clean: true,
     },
