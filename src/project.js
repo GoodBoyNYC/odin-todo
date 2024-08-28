@@ -1,3 +1,5 @@
+import { addSeconds } from "date-fns";
+
 /*
 should only contain 
 Project
@@ -7,8 +9,7 @@ Project
 -projects have own due date
 -Project completion can override if todos are not individually finished or not.
 */
-
-class Project {
+export class Project {
     constructor(title, description, dueDate, priority) {
         this.title=title;
         this.description=description;
@@ -16,4 +17,12 @@ class Project {
         this.priority=dueDate;
         this.arrTodo = [];
     }
+
+    addTodoList(obj){
+        console.log('1');
+    }
+}
+
+export function projectConsole(){
+    console.log("project.js");
 }

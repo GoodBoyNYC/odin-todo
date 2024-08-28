@@ -5,7 +5,7 @@ Todo Class
 -todos should be checked off
 
 */
-class Todo {
+export class Todo {
     constructor(title, description, dueDate, priority, isComplete=false) {
         this.title=title;
         this.description=description;
@@ -52,4 +52,8 @@ class Todo {
     set isComplete(newStatus){
         this.isComplete=newStatus;
     }
+}
+
+export function todoConsole(){
+    console.log("todo.js");
 }
