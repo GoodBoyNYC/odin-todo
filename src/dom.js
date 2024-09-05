@@ -11,7 +11,7 @@
 //2 panel thing
 function createGrid() {
     console.log("createGrid");
-    const style=`
+    const style = `
     #container {
         display: grid;
         grid-template-columns: 25% auto;
@@ -24,22 +24,35 @@ function createGrid() {
     }
     `;
     const indexContainer = document.querySelector("#container");
-    const styleSheet= document.createElement("style");
-    styleSheet.textContent=style;
+    const styleSheet = document.createElement("style");
+    styleSheet.textContent = style;
     document.head.appendChild(styleSheet);
+}
+
+function panels() {
+    const indexContainer = document.querySelector("#container");
     const divPanel_L = document.createElement("div");
     const divPanel_R = document.createElement("div");
     divPanel_L.setAttribute("class", "panel");
     divPanel_R.setAttribute("class", "content");
-    divPanel_L.textContent="Panel";
-    divPanel_R.textContent="Body";
+
+    divPanel_R.textContent = "Body";
     indexContainer.appendChild(divPanel_L);
     indexContainer.appendChild(divPanel_R);
-}
-
-function popPanel(){
+    divPanel_L.appendChild(createUL());
 
 };
 
+function createUL() {
+    const ul = document.createElement("ul")
+    const li_items = ["Add Project", "Add Task", "Today", "Upcoming"];
+    li_items.forEach((item => {
+        var li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+    }))
+    return ul;
+    ;
+}
 
-export { domBtns, createGrid};
+export { createUL, panels, createGrid };
