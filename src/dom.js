@@ -34,24 +34,27 @@ function panels() {
 
 function createUL() {
     const ul = document.createElement("ul")
-    const li_items = ["Add Project", "Add Task", "Today", "Upcoming"];
+    const li_items = ["Add Project", "Add Task", "Today", "Upcoming", "List All"];
     li_items.forEach((item => {
         var li = document.createElement("li");
-        li.setAttribute("class","click");
+        li.setAttribute("class", "click");
         li.textContent = item;
         ul.appendChild(li);
     }))
     return ul;
     ;
 }
-function clickStuffs(){
+
+function clickStuffs() {
+    //var aNumb = 0;
     const listClicks = document.querySelectorAll(".click");
     listClicks.forEach(item => {
-        item.addEventListener("click",event=>{
-            console.log(item.textContent);
+        var aNumb = 0;
+        item.addEventListener("click", event => {
+            //var aNumb = 0;
+            console.log(item.textContent+ " "+ aNumb++);
         })
     })
 }
 
-
-export { clickStuffs,createUL, panels, createGrid };
+export { clickStuffs, createUL, panels, createGrid };
