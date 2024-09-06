@@ -1,14 +1,3 @@
-// function domBtns() {
-//     const navBtns = document.querySelectorAll("button");
-
-//     navBtns.forEach(btn => {
-//         btn.addEventListener("click", event => {
-//             console.log(btn.textContent);
-//         })
-//     });
-// }
-
-//2 panel thing
 function createGrid() {
     console.log("createGrid");
     const style = `
@@ -48,11 +37,21 @@ function createUL() {
     const li_items = ["Add Project", "Add Task", "Today", "Upcoming"];
     li_items.forEach((item => {
         var li = document.createElement("li");
+        li.setAttribute("class","click");
         li.textContent = item;
         ul.appendChild(li);
     }))
     return ul;
     ;
 }
+function clickStuffs(){
+    const listClicks = document.querySelectorAll(".click");
+    listClicks.forEach(item => {
+        item.addEventListener("click",event=>{
+            console.log(item.textContent);
+        })
+    })
+}
 
-export { createUL, panels, createGrid };
+
+export { clickStuffs,createUL, panels, createGrid };

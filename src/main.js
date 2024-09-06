@@ -5,7 +5,7 @@ import { Project } from './project';
 import { projectConsole } from './project';
 import { Todo } from './todo';
 import { todoConsole } from './todo';
-import { panels,createGrid} from './dom';
+import { clickStuffs,panels,createGrid} from './dom';
 
 
 const now = new Date();
@@ -18,3 +18,4 @@ todoConsole();
 
 createGrid();
 panels();
+clickStuffs();
