@@ -1,4 +1,5 @@
 import { Project, projectConsole } from "./project";
+import { addProject, getProjects } from './data.js';
 
 function createGrid() {
     console.log("createGrid");
@@ -70,14 +71,14 @@ function dialogForm() {
     inputDueDate.type = "date";
     inputPriority.type = "checkbox"
     button.textContent = "Submit";
-    button.type="submit";
+    //button.type="submit";
     close.textContent="Close";
 
     dialog.appendChild(inputTitle);
     dialog.appendChild(inputDesc);
     dialog.appendChild(inputDueDate);
     dialog.appendChild(inputPriority);
-    
+
     dialog.appendChild(button);
     dialog.appendChild(close);
 
@@ -88,8 +89,7 @@ function dialogForm() {
         const value1 = inputTitle.value;
         const value2 = inputDesc.value;
         console.log("submit");
-        // Code to handle the form submission with the input values
-        button.close();
+        dialog.close();
         return new Project(inputTitle,inputDesc,inputDueDate,inputPriority);
     });
 
@@ -110,7 +110,9 @@ function menuInteraction() {
             console.log(item.textContent + " " + aNumb++);
             switch (item.textContent) {
                 case "Add Project":
-                    dialogForm()
+                    let obj = dialogForm();
+                    addProject(obj);
+                    console.log(getProjects());
                     break;
                 case "Add Task":
                     break;
