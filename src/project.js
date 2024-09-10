@@ -14,7 +14,7 @@ export class Project {
         this.title=title;
         this.description=description;
         this.dueDate=dueDate;
-        this.priority=dueDate;
+        this.priority=priority;
         this.arrTodo = [];
     }
 

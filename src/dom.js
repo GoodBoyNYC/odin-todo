@@ -1,3 +1,5 @@
+import { Project, projectConsole } from "./project";
+
 function createGrid() {
     console.log("createGrid");
     const style = `
@@ -45,16 +47,84 @@ function createUL() {
     ;
 }
 
-function clickStuffs() {
+function dialogForm() {
+    const dialog = document.createElement("dialog");
+
+    const inputTitle = document.createElement("input");
+    inputTitle.setAttribute("placeholder", "Title");
+
+    const inputDesc = document.createElement("input");
+    inputDesc.setAttribute("placeholder", "Description");
+
+    const inputDueDate = document.createElement("input");
+    inputDueDate.setAttribute("placeholder", "Due Date");
+
+    const inputPriority = document.createElement("input");
+    inputPriority.setAttribute("placeholder", "Priority");
+
+    const button = document.createElement("button");
+    const close = document.createElement("button");
+    
+    inputTitle.type = "text";
+    inputDesc.type = "text";
+    inputDueDate.type = "date";
+    inputPriority.type = "checkbox"
+    button.textContent = "Submit";
+    button.type="submit";
+    close.textContent="Close";
+
+    dialog.appendChild(inputTitle);
+    dialog.appendChild(inputDesc);
+    dialog.appendChild(inputDueDate);
+    dialog.appendChild(inputPriority);
+    
+    dialog.appendChild(button);
+    dialog.appendChild(close);
+
+    document.body.appendChild(dialog);
+
+    button.addEventListener("click", (event) => {
+        event.preventDefault();
+        const value1 = inputTitle.value;
+        const value2 = inputDesc.value;
+        console.log("submit");
+        // Code to handle the form submission with the input values
+        button.close();
+        return new Project(inputTitle,inputDesc,inputDueDate,inputPriority);
+    });
+
+    close.addEventListener("click", () =>{
+        dialog.close();
+    });
+
+    dialog.showModal();
+}
+
+function menuInteraction() {
     //var aNumb = 0;
     const listClicks = document.querySelectorAll(".click");
     listClicks.forEach(item => {
         var aNumb = 0;
         item.addEventListener("click", event => {
             //var aNumb = 0;
-            console.log(item.textContent+ " "+ aNumb++);
+            console.log(item.textContent + " " + aNumb++);
+            switch (item.textContent) {
+                case "Add Project":
+                    dialogForm()
+                    break;
+                case "Add Task":
+                    break;
+                case "Today":
+                    break;
+                case "Upcoming":
+                    break;
+                case "List All":
+                    break;
+                default:
+                    break;
+            }
         })
     })
 }
 
-export { clickStuffs, createUL, panels, createGrid };
+export { menuInteraction, createUL, panels, createGrid };
