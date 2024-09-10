@@ -19,7 +19,7 @@ export class Project {
     }
 
     addTodoList(obj){
-        console.log('1');
+        this.arrTodo.push(obj);
     }
 }
 

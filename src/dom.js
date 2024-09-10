@@ -83,14 +83,14 @@ function dialogForm() {
     dialog.appendChild(close);
 
     document.body.appendChild(dialog);
-
+1
     button.addEventListener("click", (event) => {
         event.preventDefault();
-        const value1 = inputTitle.value;
-        const value2 = inputDesc.value;
-        console.log("submit");
+        
+        const newProj = new Project(inputTitle.value,inputDesc.value,inputDueDate.value,inputPriority.value);
+        addProject(newProj);
         dialog.close();
-        return new Project(inputTitle,inputDesc,inputDueDate,inputPriority);
+        
     });
 
     close.addEventListener("click", () =>{
@@ -101,18 +101,14 @@ function dialogForm() {
 }
 
 function menuInteraction() {
-    //var aNumb = 0;
     const listClicks = document.querySelectorAll(".click");
     listClicks.forEach(item => {
-        var aNumb = 0;
         item.addEventListener("click", event => {
-            //var aNumb = 0;
-            console.log(item.textContent + " " + aNumb++);
             switch (item.textContent) {
                 case "Add Project":
                     let obj = dialogForm();
-                    addProject(obj);
                     console.log(getProjects());
+                    console.log("Cats");
                     break;
                 case "Add Task":
                     break;
