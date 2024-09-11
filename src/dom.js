@@ -94,6 +94,28 @@ function dialogFormTask() {
     close.addEventListener("click", () => {
         dialog.close();
     });
+    
+    const inputDesc = document.createElement("input");
+    inputDesc.setAttribute("placeholder", "Description");
+
+    const inputDueDate = document.createElement("input");
+    inputDueDate.setAttribute("placeholder", "Due Date");
+
+    const inputPriority = document.createElement("input");
+    inputPriority.setAttribute("placeholder", "Priority");
+    
+    const inputComplete = document.createElement("input");
+    inputComplete.setAttribute("placeholder", "Complete");
+
+    inputDesc.type = "text";
+    inputDueDate.type = "date";
+    inputPriority.type = "checkbox";
+    inputComplete.type = "checkbox";
+
+    dialog.appendChild(inputDesc);
+    dialog.appendChild(inputDueDate);
+    dialog.appendChild(inputPriority);
+    dialog.appendChild(inputComplete);
 
     dialog.appendChild(button);
     dialog.appendChild(close);
@@ -125,12 +147,11 @@ function renderBodyListAll() {
     const body = document.querySelector(".content");
     body.innerHTML = ''; // Clear previous content
     const arrProjects = getProjects();
-    console.log("ListAll");
+//    console.log("ListAll");
     arrProjects.forEach((project => {
         const uListProject = document.createElement("ul");
         uListProject.setAttribute("class", "project");
         uListProject.textContent = `${project.getTitle()}`;
-
         const projectDetails = [
             `Title: ${project.getTitle()}`,
             `Description: ${project.getDescription()}`,
@@ -144,9 +165,7 @@ function renderBodyListAll() {
                 li.textContent = detail;
                 uListProject.appendChild(li);
             }
-
         });
-
         body.appendChild(uListProject);
     }));
     return body;

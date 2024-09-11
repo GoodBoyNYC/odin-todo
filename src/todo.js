@@ -6,19 +6,11 @@ Todo Class
 
 */
 export class Todo {
-    constructor(title, description, dueDate, priority, isComplete=false) {
-        this.title=title;
+    constructor(description, dueDate, priority, isComplete=false) {
         this.description=description;
         this.dueDate=dueDate;
-        this.priority=priority; //1-3 scale
+        this.priority=priority;
         this.isComplete= isComplete;
-    }
-    get title() {
-        return this.title;
-    }
-
-    set title(newTitle){
-        this.title=this.title;   
     }
 
     get description(){
