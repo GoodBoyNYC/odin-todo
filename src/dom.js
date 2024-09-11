@@ -38,14 +38,17 @@ function panels() {
 function createUL() {
     const ul = document.createElement("ul")
     const li_items = ["Add Project", "Add Task", "Today", "Upcoming", "List All"];
-    li_items.forEach((item => {
+    renderListItems(li_items, ul);
+    return ul;
+}
+function renderListItems(arrObj, uList) {
+    arrObj.forEach((item => {
         var li = document.createElement("li");
         li.setAttribute("class", "click");
         li.textContent = item;
-        ul.appendChild(li);
-    }))
-    return ul;
-    ;
+        uList.appendChild(li);
+        return 
+    }));
 }
 
 function dialogForm() {
@@ -65,14 +68,14 @@ function dialogForm() {
 
     const button = document.createElement("button");
     const close = document.createElement("button");
-    
+
     inputTitle.type = "text";
     inputDesc.type = "text";
     inputDueDate.type = "date";
     inputPriority.type = "checkbox"
     button.textContent = "Submit";
     //button.type="submit";
-    close.textContent="Close";
+    close.textContent = "Close";
 
     dialog.appendChild(inputTitle);
     dialog.appendChild(inputDesc);
@@ -83,21 +86,33 @@ function dialogForm() {
     dialog.appendChild(close);
 
     document.body.appendChild(dialog);
-1
+    1
     button.addEventListener("click", (event) => {
         event.preventDefault();
-        
-        const newProj = new Project(inputTitle.value,inputDesc.value,inputDueDate.value,inputPriority.value);
+
+        const newProj = new Project(inputTitle.value, inputDesc.value, inputDueDate.value, inputPriority.value);
         addProject(newProj);
         dialog.close();
-        
+
     });
 
-    close.addEventListener("click", () =>{
+    close.addEventListener("click", () => {
         dialog.close();
     });
-
     dialog.showModal();
+}
+
+function renderAll() {
+    const body = document.querySelector(".content");
+    const arrProjects = getProjects();
+
+    arrProjects.forEach((project => {
+        const elementProj = document.createElement("ul");
+        elementProj.setAttribute("class", "project");
+        project.forEach(prop => {
+
+        })
+    }))
 }
 
 function menuInteraction() {
@@ -106,9 +121,7 @@ function menuInteraction() {
         item.addEventListener("click", event => {
             switch (item.textContent) {
                 case "Add Project":
-                    let obj = dialogForm();
-                    console.log(getProjects());
-                    console.log("Cats");
+                    dialogForm();
                     break;
                 case "Add Task":
                     break;
@@ -117,6 +130,8 @@ function menuInteraction() {
                 case "Upcoming":
                     break;
                 case "List All":
+                    console.log("list all");
+                    renderAll();
                     break;
                 default:
                     break;
