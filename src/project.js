@@ -19,6 +19,26 @@ export class Project {
     addTodoList(obj){
         this.arrTodo.push(obj);
     }
+
+    getTitle(){
+        return this.title;
+    }
+
+    getDescription(){
+        return this.description;
+    }
+
+    getDueDate() {
+        return this.dueDate;
+    }
+
+    getPriority() {
+        return this.priority;
+    }
+
+    getTodos() {
+        return this.arrTodo;
+    }
 }
 
 export function projectConsole(){

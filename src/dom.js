@@ -28,30 +28,14 @@ function panels() {
     divPanel_L.setAttribute("class", "panel");
     divPanel_R.setAttribute("class", "content");
 
-    divPanel_R.textContent = "Body";
+    //divPanel_R.textContent = "Body";
     indexContainer.appendChild(divPanel_L);
     indexContainer.appendChild(divPanel_R);
     divPanel_L.appendChild(createUL());
 
 };
 
-function createUL() {
-    const ul = document.createElement("ul")
-    const li_items = ["Add Project", "Add Task", "Today", "Upcoming", "List All"];
-    renderListItems(li_items, ul);
-    return ul;
-}
-function renderListItems(arrObj, uList) {
-    arrObj.forEach((item => {
-        var li = document.createElement("li");
-        li.setAttribute("class", "click");
-        li.textContent = item;
-        uList.appendChild(li);
-        return 
-    }));
-}
-
-function dialogForm() {
+function dialogFormProject() {
     const dialog = document.createElement("dialog");
 
     const inputTitle = document.createElement("input");
@@ -74,7 +58,6 @@ function dialogForm() {
     inputDueDate.type = "date";
     inputPriority.type = "checkbox"
     button.textContent = "Submit";
-    //button.type="submit";
     close.textContent = "Close";
 
     dialog.appendChild(inputTitle);
@@ -86,10 +69,9 @@ function dialogForm() {
     dialog.appendChild(close);
 
     document.body.appendChild(dialog);
-    1
+
     button.addEventListener("click", (event) => {
         event.preventDefault();
-
         const newProj = new Project(inputTitle.value, inputDesc.value, inputDueDate.value, inputPriority.value);
         addProject(newProj);
         dialog.close();
@@ -102,17 +84,72 @@ function dialogForm() {
     dialog.showModal();
 }
 
-function renderAll() {
+function dialogFormTask() {
+    const dialog = document.createElement("dialog");
+
+    const button = document.createElement("button");
+    const close = document.createElement("button");
+    button.textContent = "Submit";
+    close.textContent = "Close";
+    close.addEventListener("click", () => {
+        dialog.close();
+    });
+
+    dialog.appendChild(button);
+    dialog.appendChild(close);
+    document.body.appendChild(dialog);
+
+    dialog.showModal();
+
+}
+
+function createUL() {
+    const ul = document.createElement("ul");
+    const li_items = ["Add Project", "Add Task", "Today", "Upcoming", "List All"];
+    renderListItems(li_items, ul);
+    ul.querySelectorAll("li").forEach(li => {
+        li.setAttribute("class", "click");
+    });
+    return ul;
+}
+
+function renderListItems(arrObj, uList) {
+    arrObj.forEach((item => {
+        var li = document.createElement("li");
+        li.textContent = item;
+        uList.appendChild(li);
+    }));
+}
+
+function renderBodyListAll() {
     const body = document.querySelector(".content");
+    body.innerHTML = ''; // Clear previous content
     const arrProjects = getProjects();
-
+    console.log("ListAll");
     arrProjects.forEach((project => {
-        const elementProj = document.createElement("ul");
-        elementProj.setAttribute("class", "project");
-        project.forEach(prop => {
+        const uListProject = document.createElement("ul");
+        uListProject.setAttribute("class", "project");
+        uListProject.textContent = `${project.getTitle()}`;
 
-        })
-    }))
+        const projectDetails = [
+            `Title: ${project.getTitle()}`,
+            `Description: ${project.getDescription()}`,
+            `Due Date: ${project.getDueDate()}`,
+            `Priority: ${project.getPriority()}`
+        ];
+        projectDetails.forEach(detail => {
+            console.log({ detail });
+            if (!detail.includes("Title:")) {
+                const li = document.createElement("li");
+                li.textContent = detail;
+                uListProject.appendChild(li);
+            }
+
+        });
+
+        body.appendChild(uListProject);
+    }));
+    return body;
 }
 
 function menuInteraction() {
@@ -121,17 +158,17 @@ function menuInteraction() {
         item.addEventListener("click", event => {
             switch (item.textContent) {
                 case "Add Project":
-                    dialogForm();
+                    dialogFormProject();
                     break;
                 case "Add Task":
+                    dialogFormTask();
                     break;
                 case "Today":
                     break;
                 case "Upcoming":
                     break;
                 case "List All":
-                    console.log("list all");
-                    renderAll();
+                    renderBodyListAll();
                     break;
                 default:
                     break;
