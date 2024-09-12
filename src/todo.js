@@ -7,42 +7,42 @@ Todo Class
 */
 export class Todo {
     constructor(description, dueDate, priority, isComplete=false) {
-        this.description=description;
-        this.dueDate=dueDate;
-        this.priority=priority;
-        this.isComplete= isComplete;
+        this.__description=description;
+        this._dueDate=dueDate;
+        this._priority=priority;
+        this._isComplete= isComplete;
     }
 
     get description(){
-        return this.description;
+        return this._description;
     }
 
     set description(newDesc){
-        this.description=newDesc;
+        this._description=newDesc;
     }
 
     get dueDate(){
-        return this.dueDate;
+        return this._dueDate;
     }
 
     set dueDate(newDate){
-        this.dueDate=newDate;
+        this._dueDate=newDate;
     }
 
     get priority(){
-        return this.priority;
+        return this._priority;
     }
 
     set priority(newPriority){
-        this.priority=newPriority;
+        this._priority=newPriority;
     }
 
     get isComplete(){
-        return this.isComplete;
+        return this._isComplete;
     }
 
     set isComplete(newStatus){
-        this.isComplete=newStatus;
+        this._isComplete=newStatus;
     }
 }
 

@@ -1,5 +1,6 @@
 import { Project, projectConsole } from "./project";
 import { addProject, getProjects } from './data.js';
+import { Todo } from "./todo.js";
 
 function createGrid() {
     console.log("createGrid");
@@ -75,7 +76,6 @@ function dialogFormProject() {
         const newProj = new Project(inputTitle.value, inputDesc.value, inputDueDate.value, inputPriority.value);
         addProject(newProj);
         dialog.close();
-
     });
 
     close.addEventListener("click", () => {
@@ -94,7 +94,20 @@ function dialogFormTask() {
     close.addEventListener("click", () => {
         dialog.close();
     });
-    
+
+    const inputProject = document.createElement("select");
+
+    let op = new Option();
+
+    let arrProjects = getProjects();
+    let index = 0;
+    arrProjects.forEach(project => {
+        op.value = index;
+        op.text = project.getTitle();
+        inputProject.options.add(op);
+        index++;
+    })
+
     const inputDesc = document.createElement("input");
     inputDesc.setAttribute("placeholder", "Description");
 
@@ -103,7 +116,7 @@ function dialogFormTask() {
 
     const inputPriority = document.createElement("input");
     inputPriority.setAttribute("placeholder", "Priority");
-    
+
     const inputComplete = document.createElement("input");
     inputComplete.setAttribute("placeholder", "Complete");
 
@@ -112,6 +125,14 @@ function dialogFormTask() {
     inputPriority.type = "checkbox";
     inputComplete.type = "checkbox";
 
+    button.addEventListener("click", (event) => {
+        event.preventDefault();
+        let aTodo = new Todo(inputDesc.value, inputDueDate.value, inputPriority.value, inputComplete.value)
+        arrProjects[op.value].addTodoList(aTodo);
+        dialog.close();
+    });
+
+    dialog.appendChild(inputProject);
     dialog.appendChild(inputDesc);
     dialog.appendChild(inputDueDate);
     dialog.appendChild(inputPriority);
@@ -147,7 +168,7 @@ function renderBodyListAll() {
     const body = document.querySelector(".content");
     body.innerHTML = ''; // Clear previous content
     const arrProjects = getProjects();
-//    console.log("ListAll");
+    //    console.log("ListAll");
     arrProjects.forEach((project => {
         const uListProject = document.createElement("ul");
         uListProject.setAttribute("class", "project");
